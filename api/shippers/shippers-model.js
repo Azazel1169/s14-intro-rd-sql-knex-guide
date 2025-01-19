@@ -33,6 +33,8 @@ async function update(shipperId, changes) {
   return result;
 }
 
-async function remove() {
-  return "delete wired";
+async function remove(shipperId) {
+  const toBeDeleted = await getById(shipperId);
+  await db("shippers").del().where("shipperid", shipperId);
+  return toBeDeleted;
 }
